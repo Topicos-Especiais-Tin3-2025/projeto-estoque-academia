@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Estoque da Academia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Itens no Estoque</h1>
+    <a href="/add">Adicionar Novo Item</a>
+    <table border="1">
+        <tr>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th>Quantidade</th>
+            <th>Status</th>
+            <th>Inserção</th>
+            <th>Atualização</th>
+            <th>Ações</th>
+        </tr>
+        {% for item in itens %}
+        <tr>
+            <td>{{ item.nome }}</td>
+            <td>{{ item.categoria }}</td>
+            <td>{{ item.quantidade }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.data_insercao }}</td>
+            <td>{{ item.data_atualizacao }}</td>
+            <td>
+                <a href="/update/{{ item._id }}">Editar</a> |
+                <a href="/delete/{{ item._id }}/{{ item._rev }}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
