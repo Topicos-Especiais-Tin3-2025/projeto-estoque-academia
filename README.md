@@ -3,92 +3,68 @@
 Aplicação local construída com **Flask** e **CouchDB**, pensada para controle de equipamentos e acessórios de academias. Permite **inserir**, **editar**, **excluir** e **consultar** itens com filtros por data, status e categoria.
 
 ---
-
 ## ✅ Requisitos
 
 - Python 3.10+
-- Docker Desktop (para rodar o banco CouchDB)
+- CouchDB
+
+## Tecnologias
+
+- Backend: Python (Flask, Flask-CORS, Requests)
+- Banco de Dados: CouchDB
+- Frontend: HTML, CSS, JavaScript
 
 ---
 
-## 📁 Estrutura do Projeto
-
-```
-estoque_academia/
-├── app.py
-├── db.py
-├── requirements.txt
-├── docker-compose.yml
-├── static/
-│   └── style.css
-└── templates/
-    ├── index.html
-    ├── add_item.html
-    └── update_item.html
-```
-
----
-
-## ⚙️ Setup Rápido
+## Instalação & Configuração
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/estoque_academia.git
-cd estoque_academia
+git clone https://github.com/seuUsuario/seuRepositorio.git
+cd seuRepositorio
 ```
 
-### 2. Suba o CouchDB com Docker
-```bash
-docker-compose up -d
-```
+### 2.  Instalar e Configurar o CouchDB
+Instale o CouchDB.
+Abra o painel web (Fauxton): http://localhost:5984/_utils/
+Crie um banco chamado gymstorage.
+Crie um usuário admin e senha se solicitado.
+Anote usuário e senha para uso no backend.
 
-Acesse no navegador: http://localhost:5984/_utils/  
-Login: `admin` — Senha: `admin`
-
-Crie um banco chamado:
-```
-estoque
-```
-
-### 3. Prepare o ambiente Python
-
-#### (opcional, mas recomendado)
-```bash
-python -m venv venv
-venv\Scripts\activate  # Windows
-# ou
-source venv/bin/activate  # Linux/macOS
-```
-
-### 4. Instale as dependências
+### 3. Instalar as dependências
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Rode o servidor Flask
+### 4. Configure as Variáveis do Backend
+No arquivo app.py, ajuste os dados de conexão com o CouchDB conforme:
+
+```bash
+COUCHDB_URL = 'http://localhost:5984'
+DB_NAME = 'gymstorage'
+COUCHDB_USER = 'admin'      # Seu usuário
+COUCHDB_PASSWORD = 'admin'  # Sua senha
+```
+
+### 5. Iniciar o Backend
 ```bash
 python app.py
 ```
+O backend rodará em http://127.0.0.1:5000
+Teste com: http://127.0.0.1:5000/itens (deve ver um JSON)
 
-### 6. Acesse no navegador
-```
-http://127.0.0.1:5000
-```
+### 6. Iniciar o Frontend
+- Basta abrir o arquivo index.html (ou outros HTMLs do projeto) no navegador.
+- Recomendado: Chrome, Firefox ou Edge.
 
----
+### 7. Usando o Sistema
+- Cadastro: clique em "Adicionar Item" no topo do index.
+- Edição: clique no ícone de editar na tabela principal e modifique os dados.
+- Exclusão: na tela de edição, use o botão "Excluir".
+- Filtros: utilize as caixas de filtro para buscar itens por nome,  categoria, -status ou valor.
+- Histórico: veja as movimentações completas na tela "Histórico".
 
-## 🧠 Funcionalidades
-- Inserção de itens com nome, categoria, quantidade e status
-- Atualização de status e quantidade
-- Exclusão de itens
-- Listagem de itens em tabela com filtros planejados
-
----
-
-## 👥 Equipe
-Este projeto está sendo desenvolvido por Gustavo e seu time na disciplina de Tópicos Especiais em Engenharia da Computação na Facens.
-
----
-
-## 📌 Licença
-Projeto educacional — uso livre com créditos à equipe.
+### 8. Observações Finais
+O sistema é totalmente responsivo e funciona apenas abrindo os arquivos HTML.
+CouchDB deve estar sempre rodando em segundo plano.
+Não esqueça de manter o app.py (backend) ativo para conexão entre frontend e banco.
